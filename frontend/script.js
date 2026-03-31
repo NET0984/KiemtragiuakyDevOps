@@ -178,8 +178,31 @@ async function fetchAbout() {
         const response = await fetch(`${API_BASE_URL}/about`);
         const data = await response.json();
         
+        // Tạo avatar từ initials
+        const initials = data.student_name.split(' ').map(word => word[0]).join('').toUpperCase();
+        const colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe'];
+        const bgColor = colors[Math.floor(Math.random() * colors.length)];
+        
         const aboutContent = document.getElementById('aboutContent');
         aboutContent.innerHTML = `
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <div style="
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    background: linear-gradient(135deg, ${bgColor} 0%, #764ba2 100%);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 auto 1rem;
+                    font-size: 3rem;
+                    color: white;
+                    font-weight: bold;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                ">
+                    ${initials}
+                </div>
+            </div>
             <p><strong>📝 Họ Tên:</strong> ${data.student_name}</p>
             <p><strong>🆔 Mã Số Sinh Viên:</strong> ${data.student_id}</p>
             <p><strong>🎓 Lớp:</strong> ${data.class}</p>

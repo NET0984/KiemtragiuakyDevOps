@@ -79,9 +79,9 @@ def health():
 @app.route('/about', methods=['GET'])
 def about():
     return jsonify({
-        "student_name": "Nguyễn Văn A",
-        "student_id": "20230001",
-        "class": "CNTT-01",
+        "student_name": "Bùi Việt Cường",
+        "student_id": "2251220094",
+        "class": "22TC2",
         "app_name": os.getenv('APP_NAME', 'DevOps Mini Project')
     }), 200
 
