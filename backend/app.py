@@ -10,6 +10,12 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
+# Set UTF-8 encoding for all responses
+@app.after_request
+def after_request(response):
+    response.headers['Content-Type'] = 'application/json; charset=utf-8'
+    return response
+
 # Config
 DB_HOST = os.getenv('DB_HOST', 'localhost')
 DB_USER = os.getenv('DB_USER', 'root')
@@ -24,8 +30,12 @@ def get_db_connection():
             user=DB_USER,
             password=DB_PASSWORD,
             database=DB_NAME,
+            charset='utf8mb4',
             cursorclass=pymysql.cursors.DictCursor
         )
+        cursor = connection.cursor()
+        cursor.execute("SET NAMES utf8mb4")
+        cursor.close()
         return connection
     except Exception as e:
         print(f"Database connection error: {e}")
@@ -39,13 +49,15 @@ def init_db():
             connection = pymysql.connect(
                 host=DB_HOST,
                 user=DB_USER,
-                password=DB_PASSWORD
+                password=DB_PASSWORD,
+                charset='utf8mb4'
             )
             cursor = connection.cursor()
             
             # Tạo database
-            cursor.execute(f'CREATE DATABASE IF NOT EXISTS {DB_NAME}')
+            cursor.execute(f'CREATE DATABASE IF NOT EXISTS {DB_NAME} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci')
             connection.select_db(DB_NAME)
+            cursor.execute("SET NAMES utf8mb4")
             
             # Tạo bảng Students
             cursor.execute('''
@@ -55,7 +67,7 @@ def init_db():
                     student_id VARCHAR(20) UNIQUE NOT NULL,
                     class_name VARCHAR(50) NOT NULL,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
+                ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
             ''')
             
             connection.commit()

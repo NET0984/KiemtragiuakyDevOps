@@ -50,6 +50,9 @@ function showSection(sectionId) {
 async function fetchStudents() {
     try {
         const response = await fetch(`${API_BASE_URL}/api/students`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch students');
+        }
         const students = await response.json();
         
         const studentList = document.getElementById('studentList');
@@ -60,13 +63,14 @@ async function fetchStudents() {
         } else {
             students.forEach(student => {
                 const row = document.createElement('tr');
+                const escapedName = student['student_name'].replace(/'/g, "\\'");
                 row.innerHTML = `
                     <td>${student['id']}</td>
                     <td>${student['student_name']}</td>
                     <td>${student['student_id']}</td>
                     <td>${student['class_name']}</td>
                     <td>
-                        <button class="btn edit" onclick="editStudentName(${student['id']}, '${student['student_name']}', '${student['class_name']}')">Sửa</button>
+                        <button class="btn edit" onclick="editStudentName(${student['id']}, '${escapedName}', '${student['class_name']}')">Sửa</button>
                         <button class="btn delete" onclick="deleteStudent(${student['id']})">Xóa</button>
                     </td>
                 `;
@@ -203,9 +207,9 @@ async function fetchAbout() {
                     ${initials}
                 </div>
             </div>
-            <p><strong>📝 Họ Tên:</strong> ${data.student_name}</p>
-            <p><strong>🆔 Mã Số Sinh Viên:</strong> ${data.student_id}</p>
-            <p><strong>🎓 Lớp:</strong> ${data.class}</p>
+            <p><strong>📝 Họ Tên:</strong> ${data.student_name}</p><br>
+            <p><strong>🆔 Mã Số Sinh Viên:</strong> ${data.student_id}</p><br>
+            <p><strong>🎓 Lớp:</strong> ${data.class}</p><br>
             <p><strong>🚀 Ứng Dụng:</strong> ${data.app_name}</p>
         `;
     } catch (error) {
