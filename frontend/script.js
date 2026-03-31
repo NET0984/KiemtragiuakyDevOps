@@ -62,7 +62,7 @@ async function fetchStudents() {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${student['id']}</td>
-                    <td>${student['student_name']}</td>
+                    <td style="cursor: pointer; color: #667eea; text-decoration: underline;" onclick="editStudentName(${student['id']}, '${student['student_name']}', '${student['class_name']}')">${student['student_name']}</td>
                     <td>${student['student_id']}</td>
                     <td>${student['class_name']}</td>
                     <td><button class="btn delete" onclick="deleteStudent(${student['id']})">Xóa</button></td>
@@ -127,6 +127,42 @@ async function deleteStudent(id) {
             fetchStudents();
         } else {
             alert('Lỗi khi xóa');
+        }
+    } catch (error) {
+        alert('Lỗi: ' + error);
+    }
+}
+
+// Edit Student Name
+async function editStudentName(id, currentName, className) {
+    const newName = prompt(`Sửa tên sinh viên:\n(Tên hiện tại: ${currentName})`, currentName);
+    
+    if (newName === null || newName.trim() === '') {
+        return;
+    }
+    
+    if (newName === currentName) {
+        alert('Tên không thay đổi');
+        return;
+    }
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/students/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                student_name: newName.trim(),
+                class_name: className
+            })
+        });
+        
+        if (response.ok) {
+            alert('Cập nhật tên thành công');
+            fetchStudents();
+        } else {
+            alert('Lỗi khi cập nhật');
         }
     } catch (error) {
         alert('Lỗi: ' + error);
