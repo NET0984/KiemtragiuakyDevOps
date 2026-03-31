@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Mini Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🚀 DevOps Project</h1>
+            <ul class="nav-links">
+                <li><a href="#home" onclick="loadHome()">Trang Chủ</a></li>
+                <li><a href="#students" onclick="loadStudents()">Sinh Viên</a></li>
+                <li><a href="#about" onclick="loadAbout()">Về Tôi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <h2>Chào Mừng</h2>
+            <p>Đây là project DevOps kết hợp Backend (Flask), Frontend (HTML/CSS/JS) và Database (MySQL)</p>
+            <div class="status">
+                <h3>Trạng thái hệ thống:</h3>
+                <p id="health-status">Đang kiểm tra...</p>
+            </div>
+        </section>
+
+        <!-- Students Section -->
+        <section id="students" class="section">
+            <h2>Quản Lý Sinh Viên</h2>
+            
+            <div class="form-group">
+                <h3>Thêm Sinh Viên Mới</h3>
+                <input type="text" id="studentName" placeholder="Họ tên sinh viên" class="input-field">
+                <input type="text" id="studentId" placeholder="Mã số sinh viên" class="input-field">
+                <input type="text" id="className" placeholder="Lớp" class="input-field">
+                <button onclick="addStudent()" class="btn">Thêm</button>
+            </div>
+
+            <div class="list-group">
+                <h3>Danh Sách Sinh Viên</h3>
+                <table id="studentTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Họ Tên</th>
+                            <th>Mã SV</th>
+                            <th>Lớp</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentList">
+                        <tr><td colspan="5">Đang tải...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2>Thông Tin Cá Nhân</h2>
+            <div id="aboutContent" class="about-card">
+                <p>Đang tải...</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 DevOps Mini Project. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
