@@ -14,6 +14,8 @@
                 <li><a href="#home" onclick="loadHome()">Trang Chủ</a></li>
                 <li><a href="#students" onclick="loadStudents()">Sinh Viên</a></li>
                 <li><a href="#about" onclick="loadAbout()">Về Tôi</a></li>
+                <li><a href="#api-health" onclick="loadApiHealth()">API Health</a></li>
+                <li><a href="#api-students-raw" onclick="loadApiStudentsRaw()">Raw API</a></li>
             </ul>
         </div>
     </nav>
@@ -65,6 +67,28 @@
             <h2>Thông Tin Cá Nhân</h2>
             <div id="aboutContent" class="about-card">
                 <p>Đang tải...</p>
+            </div>
+        </section>
+
+        <!-- API Health Section -->
+        <section id="api-health" class="section">
+            <h2>API Health Status</h2>
+            <div class="api-response">
+                <p>Endpoint: <code>GET /health</code></p>
+                <p>Status: <span id="healthStatusBadge">Kiểm tra...</span></p>
+                <pre id="healthResponseBody">Đang tải...</pre>
+                <button onclick="loadApiHealth()" class="btn">Refresh</button>
+            </div>
+        </section>
+
+        <!-- Raw API Section -->
+        <section id="api-students-raw" class="section">
+            <h2>Raw API Data</h2>
+            <div class="api-response">
+                <p>Endpoint: <code>GET /api/students</code></p>
+                <p>Số lượng: <span id="studentCountBadge">-</span></p>
+                <pre id="apiResponseBody">Đang tải...</pre>
+                <button onclick="loadApiStudentsRaw()" class="btn">Refresh</button>
             </div>
         </section>
     </div>

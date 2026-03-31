@@ -204,6 +204,42 @@ h3 {
     display: inline-block;
 }
 
+/* API Response Styling */
+.api-response {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 1.5rem;
+}
+
+.api-response p {
+    margin: 0.8rem 0;
+    color: #333;
+}
+
+.api-response code {
+    background-color: #f4f4f4;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    color: #d63384;
+}
+
+.api-response pre {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 1rem 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
 footer {
     background-color: #2c3e50;
     color: white;

@@ -216,3 +216,50 @@ async function fetchAbout() {
         document.getElementById('aboutContent').innerHTML = `<p style="color: red;">Lỗi khi tải thông tin: ${error}</p>`;
     }
 }
+
+// Load API Health Section
+async function loadApiHealth() {
+    showSection('api-health');
+    try {
+        const response = await fetch(`${API_BASE_URL}/health`);
+        const data = await response.json();
+        
+        // Update status badge
+        const statusBadge = document.getElementById('healthStatusBadge');
+        if (response.ok && data.status === 'ok') {
+            statusBadge.textContent = '✅ OK';
+            statusBadge.style.color = '#27ae60';
+        } else {
+            statusBadge.textContent = '❌ Error';
+            statusBadge.style.color = '#e74c3c';
+        }
+        
+        // Display response body
+        document.getElementById('healthResponseBody').textContent = JSON.stringify(data, null, 2);
+    } catch (error) {
+        document.getElementById('healthStatusBadge').textContent = '❌ Connection Error';
+        document.getElementById('healthStatusBadge').style.color = '#e74c3c';
+        document.getElementById('healthResponseBody').textContent = `Error: ${error.message}`;
+    }
+}
+
+// Load Raw API Students Section
+async function loadApiStudentsRaw() {
+    showSection('api-students-raw');
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/students`);
+        const data = await response.json();
+        
+        // Update count badge
+        const countBadge = document.getElementById('studentCountBadge');
+        countBadge.textContent = data.length + ' sinh viên';
+        countBadge.style.color = '#3498db';
+        
+        // Display response body
+        document.getElementById('apiResponseBody').textContent = JSON.stringify(data, null, 2);
+    } catch (error) {
+        document.getElementById('studentCountBadge').textContent = 'Connection Error';
+        document.getElementById('studentCountBadge').style.color = '#e74c3c';
+        document.getElementById('apiResponseBody').textContent = `Error: ${error.message}`;
+    }
+}
