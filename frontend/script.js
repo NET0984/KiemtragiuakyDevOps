@@ -62,10 +62,13 @@ async function fetchStudents() {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${student['id']}</td>
-                    <td style="cursor: pointer; color: #667eea; text-decoration: underline;" onclick="editStudentName(${student['id']}, '${student['student_name']}', '${student['class_name']}')">${student['student_name']}</td>
+                    <td>${student['student_name']}</td>
                     <td>${student['student_id']}</td>
                     <td>${student['class_name']}</td>
-                    <td><button class="btn delete" onclick="deleteStudent(${student['id']})">Xóa</button></td>
+                    <td>
+                        <button class="btn edit" onclick="editStudentName(${student['id']}, '${student['student_name']}', '${student['class_name']}')">Sửa</button>
+                        <button class="btn delete" onclick="deleteStudent(${student['id']})">Xóa</button>
+                    </td>
                 `;
                 studentList.appendChild(row);
             });
